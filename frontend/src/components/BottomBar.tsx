@@ -17,18 +17,18 @@ const BottomBar = ({
   handleToggleVideo,
   clickedIcon,
 }: Props) => {
-  const [muteIcon, setMuteIcon] = useState<IconType>(AiOutlineAudioMuted);
-  const [videoIcon, setVideoIcon] = useState<IconType>(FaVideoSlash);
+  const [MuteIcon, setMuteIcon] = useState<IconType>(AiOutlineAudioMuted);
+  const [VideoIcon, setVideoIcon] = useState<IconType>(FaVideoSlash);
 
   const toggleMuteIcon = () => {
-    setMuteIcon((prevIcon) =>
+    setMuteIcon((prevIcon: IconType) =>
       prevIcon === AiFillAudio ? AiOutlineAudioMuted : AiFillAudio
     );
     handleToggleMute(); // Call the parent function
   };
 
   const toggleVideoIcon = () => {
-    setVideoIcon((prevIcon) =>
+    setVideoIcon((prevIcon: IconType) =>
       prevIcon === FaVideo ? FaVideoSlash : FaVideo
     );
     handleToggleVideo(); // Call the parent function
@@ -43,10 +43,10 @@ const BottomBar = ({
       }`}
     >
       <button onClick={toggleMuteIcon}>
-        <muteIcon /> {/* Correctly render the current icon as a component */}
+        <MuteIcon />
       </button>
       <button onClick={toggleVideoIcon}>
-        <videoIcon /> {/* Correctly render the current icon as a component */}
+        <VideoIcon />
       </button>
       <button onClick={disconnectRoom}>
         <MdCallEnd />
