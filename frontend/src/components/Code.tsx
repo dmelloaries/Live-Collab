@@ -1,3 +1,27 @@
+// import React, { useState, useEffect } from "react";
+// import Editor from "@monaco-editor/react";
+// import { Socket, io } from "socket.io-client";
+// import axios from "axios";
+// import {
+//   Box,
+//   Button,
+//   Text,
+//   useToast,
+//   Flex,
+//   Select,
+//   IconButton,
+//   VStack,
+//   Heading,
+//   HStack,
+// } from "@chakra-ui/react";
+// import {
+//   Play,
+//   Code as CodeIcon,
+//   Terminal,
+//   ChevronLeft,
+//   ChevronRight,
+// } from "lucide-react";
+// import problems from "../utils/problems"; // Importing your problem JSON
 import React, { useState, useEffect } from "react";
 import Editor from "@monaco-editor/react";
 import { Socket, io } from "socket.io-client";
@@ -18,10 +42,14 @@ import {
   Play,
   Code as CodeIcon,
   Terminal,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
+  Book,
+  Settings,
 } from "lucide-react";
-import problems from "../utils/problems"; // Importing your problem JSON
+import problems from "../utils/problems";
+
 
 const SAVE_INTERVAL_MS = 2000;
 const API = axios.create({
@@ -187,6 +215,152 @@ function Code() {
     }
   };
 
+// return (
+//   <Flex direction="column" h="100vh" bg="gray.900" color="white">
+//     {/* Top bar */}
+//     <Flex
+//       justifyContent="space-between"
+//       alignItems="center"
+//       p={4}
+//       borderBottom="1px solid"
+//       borderColor="gray.700"
+//     >
+//       <Flex alignItems="center">
+//         <CodeIcon size={24} className="mr-4" />
+//         <Select
+//           value={fileName}
+//           onChange={handleLanguageChange}
+//           width="200px"
+//           variant="filled"
+//           bg="gray.800"
+//           color="white"
+//           borderColor="gray.700"
+//           _hover={{ borderColor: "gray.600" }}
+//           size="lg"
+//         >
+//           {Object.keys(files).map((lang) => (
+//             <option key={lang} value={lang}>
+//               {lang}
+//             </option>
+//           ))}
+//         </Select>
+//       </Flex>
+//       <Button
+//         leftIcon={<Play size={20} />}
+//         colorScheme="green"
+//         onClick={runCode}
+//         isLoading={isLoading}
+//         loadingText="Running"
+//         size="lg"
+//       >
+//         Run Code
+//       </Button>
+//     </Flex>
+
+//     <Flex flex={1} overflow="hidden">
+//       {/* Left panel: Problem description */}
+//       <Box
+//         width="25%"
+//         p={6}
+//         borderRight="1px solid"
+//         borderColor="gray.700"
+//         overflowY="auto"
+//       >
+//         <VStack align="stretch" spacing={4}>
+//         <h1 className="font-bold">Question</h1>
+//         <hr></hr>
+//           <Heading size="xl">{selectedProblem.title}</Heading>
+//           <Text fontSize="md">{selectedProblem.description}</Text>
+//           <Box bg="gray.800" p={4} borderRadius="md">
+            
+//             <Text fontWeight="bold" mb={2}>
+//               Input:
+//             </Text>
+//             <Text>{JSON.stringify(selectedProblem.input)}</Text>
+//           </Box>
+//           <Box bg="gray.800" p={4} borderRadius="md">
+//             <Text fontWeight="bold" mb={2}>
+//               Expected Output:
+//             </Text>
+//             <Text>{JSON.stringify(selectedProblem.expected_output)}</Text>
+//           </Box>
+//           <HStack justifyContent="space-between">
+//             <IconButton
+//               icon={<ChevronLeft />}
+//               aria-label="Previous problem"
+//               onClick={goToPreviousProblem}
+//               isDisabled={currentProblemIndex === 0}
+//               size="lg"
+//             />
+//             <IconButton
+//               icon={<ChevronRight />}
+//               aria-label="Next problem"
+//               onClick={goToNextProblem}
+//               isDisabled={currentProblemIndex === problems.length - 1}
+//               size="lg"
+//             />
+//           </HStack>
+//         </VStack>
+//       </Box>
+
+//       {/* Middle panel: Code editor */}
+//       <Box flex={1} borderRight="1px solid" borderColor="gray.700">
+//         <Editor
+//           height="100%"
+//           defaultLanguage="typescript"
+//           language={file.language}
+//           theme="vs-dark"
+//           value={editorContent}
+//           onChange={handleEditorChange}
+//           options={{
+//             minimap: { enabled: false },
+//             fontSize: 16,
+//             lineNumbers: "on",
+//             roundedSelection: true,
+//             scrollBeyondLastLine: false,
+//             automaticLayout: true,
+//           }}
+//         />
+//       </Box>
+
+//       {/* Right panel: Output */}
+//       <Box width="25%" p={6}>
+//         <VStack align="stretch" height="100%" spacing={4}>
+//           <Flex alignItems="center">
+//             <Terminal size={24} className="mr-2" />
+//             <Heading size="md">Output</Heading>
+//           </Flex>
+//           <Box
+//             flex={1}
+//             bg="gray.800"
+//             p={4}
+//             borderRadius="md"
+//             overflowY="auto"
+//           >
+//             {output ? (
+//               <Text
+//                 whiteSpace="pre-wrap"
+//                 fontFamily="monospace"
+//                 fontSize="md"
+//                 color={isError ? "red.400" : "green.400"}
+//               >
+//                 {output}
+//               </Text>
+//             ) : (
+//               <Text color="gray.500">
+//                 Run your code to see the output here
+//               </Text>
+//             )}
+//           </Box>
+//         </VStack>
+//       </Box>
+//     </Flex>
+//   </Flex>
+// );
+// }
+
+// export default Code;
+
 return (
   <Flex direction="column" h="100vh" bg="gray.900" color="white">
     {/* Top bar */}
@@ -196,6 +370,7 @@ return (
       p={4}
       borderBottom="1px solid"
       borderColor="gray.700"
+      bg="gray.800"
     >
       <Flex alignItems="center">
         <CodeIcon size={24} className="mr-4" />
@@ -204,11 +379,12 @@ return (
           onChange={handleLanguageChange}
           width="200px"
           variant="filled"
-          bg="gray.800"
+          bg="gray.700"
           color="white"
-          borderColor="gray.700"
-          _hover={{ borderColor: "gray.600" }}
-          size="lg"
+          borderColor="gray.600"
+          _hover={{ borderColor: "gray.500" }}
+          size="md"
+          icon={<ChevronDown size={20} />}
         >
           {Object.keys(files).map((lang) => (
             <option key={lang} value={lang}>
@@ -217,16 +393,27 @@ return (
           ))}
         </Select>
       </Flex>
-      <Button
-        leftIcon={<Play size={20} />}
-        colorScheme="green"
-        onClick={runCode}
-        isLoading={isLoading}
-        loadingText="Running"
-        size="lg"
-      >
-        Run Code
-      </Button>
+      <HStack spacing={4}>
+        <Button
+          leftIcon={<Play size={20} />}
+          colorScheme="green"
+          onClick={runCode}
+          isLoading={isLoading}
+          loadingText="Running"
+          size="md"
+          variant="solid"
+          _hover={{ transform: "translateY(-2px)", boxShadow: "lg" }}
+        >
+          Run Code
+        </Button>
+        <IconButton
+          icon={<Settings size={20} />}
+          aria-label="Settings"
+          variant="ghost"
+          colorScheme="gray"
+          size="md"
+        />
+      </HStack>
     </Flex>
 
     <Flex flex={1} overflow="hidden">
@@ -237,39 +424,45 @@ return (
         borderRight="1px solid"
         borderColor="gray.700"
         overflowY="auto"
+        bg="gray.800"
       >
-        <VStack align="stretch" spacing={4}>
-        <h1 className="font-bold">Question</h1>
-        <hr></hr>
-          <Heading size="xl">{selectedProblem.title}</Heading>
+        <VStack align="stretch" spacing={6}>
+          <Flex alignItems="center">
+            <Book size={24} className="mr-2" />
+            <Heading size="lg">Problem</Heading>
+          </Flex>
+          <Heading size="xl" color="blue.300">{selectedProblem.title}</Heading>
           <Text fontSize="md">{selectedProblem.description}</Text>
-          <Box bg="gray.800" p={4} borderRadius="md">
-            
-            <Text fontWeight="bold" mb={2}>
+          <Box bg="gray.700" p={4} borderRadius="md" boxShadow="md">
+            <Text fontWeight="bold" mb={2} color="green.300">
               Input:
             </Text>
             <Text>{JSON.stringify(selectedProblem.input)}</Text>
           </Box>
-          <Box bg="gray.800" p={4} borderRadius="md">
-            <Text fontWeight="bold" mb={2}>
+          <Box bg="gray.700" p={4} borderRadius="md" boxShadow="md">
+            <Text fontWeight="bold" mb={2} color="green.300">
               Expected Output:
             </Text>
             <Text>{JSON.stringify(selectedProblem.expected_output)}</Text>
           </Box>
           <HStack justifyContent="space-between">
             <IconButton
-              icon={<ChevronLeft />}
+              icon={<ChevronLeft size={24} />}
               aria-label="Previous problem"
               onClick={goToPreviousProblem}
               isDisabled={currentProblemIndex === 0}
               size="lg"
+              variant="outline"
+              colorScheme="blue"
             />
             <IconButton
-              icon={<ChevronRight />}
+              icon={<ChevronRight size={24} />}
               aria-label="Next problem"
               onClick={goToNextProblem}
               isDisabled={currentProblemIndex === problems.length - 1}
               size="lg"
+              variant="outline"
+              colorScheme="blue"
             />
           </HStack>
         </VStack>
@@ -288,15 +481,16 @@ return (
             minimap: { enabled: false },
             fontSize: 16,
             lineNumbers: "on",
-            roundedSelection: true,
+            roundedSelection: false,
             scrollBeyondLastLine: false,
             automaticLayout: true,
+            padding: { top: 16, bottom: 16 },
           }}
         />
       </Box>
 
       {/* Right panel: Output */}
-      <Box width="25%" p={6}>
+      <Box width="25%" p={6} bg="gray.800">
         <VStack align="stretch" height="100%" spacing={4}>
           <Flex alignItems="center">
             <Terminal size={24} className="mr-2" />
@@ -304,10 +498,11 @@ return (
           </Flex>
           <Box
             flex={1}
-            bg="gray.800"
+            bg="gray.700"
             p={4}
             borderRadius="md"
             overflowY="auto"
+            boxShadow="md"
           >
             {output ? (
               <Text
@@ -319,7 +514,7 @@ return (
                 {output}
               </Text>
             ) : (
-              <Text color="gray.500">
+              <Text color="gray.400">
                 Run your code to see the output here
               </Text>
             )}

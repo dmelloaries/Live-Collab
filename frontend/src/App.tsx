@@ -1,59 +1,108 @@
+import React from 'react';
 import { useNavigate } from "react-router-dom";
-import logo from "./assets/logo.png";
+import { Pencil, FileText, Code, Users, Video } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-function App() {
+const App = () => {
   const navigate = useNavigate();
 
-  function handleSignInClickEvent() {
-    navigate("/sign-in/");
-  }
+  const handleSignInClick = () => navigate("/sign-in/");
+  const handleSignUpClick = () => navigate("/sign-up/");
 
-  function handleSignUpClickEvent() {
-    navigate("/sign-up/");
-  }
   return (
-    <>
-      {/* <div className="bg-gray-900 text-white min-h-screen flex flex-col justify-between"> */}
-      <div
-        style={{
-          background: "#1C1919",
-        }}
-        className="h-screen"
+    <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white min-h-screen flex flex-col justify-between">
+      <motion.header 
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="p-6 flex justify-between items-center"
       >
-        <div className="flex flex-col items-center justify-center">
-          <img
-            // className="px-8 py-4"
-            className="px-4 py-1 transition duration-300 ease-in-out transform hover:scale-105"
-            // className="px-8 py-4 transition duration-300 ease-in-out transform hover:scale-110"
-            style={{ height: "13rem", width: "18rem" }}
-            src={logo}
-            alt="Description"
-          />
-          <p
-            className="m-6 font-extrabold text-center text-transparent text-2xl bg-clip-text bg-gradient-to-r from-yellow-600 to-red-600 transition duration-300 ease-in-out transform hover:scale-105"
-            style={{ height: "6rem", width: "53vw" }}
-          >
-            A Place to Meet, Draw, Write, Code, and Collaborate in One Stop.
-          </p>
+        <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-500">
+          UniSync
+        </h1>
+        <div className="flex space-x-4">
+          <Button onClick={handleSignInClick} small>Sign In</Button>
+          <Button onClick={handleSignUpClick} primary small>Sign Up</Button>
         </div>
-        <div className="flex h-28 m-6 items-center justify-center space-x-44 border-secondary">
-          <button
-            className="text-secondary bg-gray-900 hover:text-gray-900 hover:bg-secondary hover:font-bold font-semibold py-4 px-4 rounded-lg w-28 border border-secondary transition duration-300 ease-in-out transform hover:scale-105"
-            onClick={handleSignInClickEvent}
-          >
-            Sign In
-          </button>
-          <button
-            className="text-secondary bg-gray-900 hover:text-gray-900 hover:bg-secondary hover:font-bold font-semibold py-4 px-4 rounded-lg w-28 border border-secondary transition duration-300 ease-in-out transform hover:scale-105"
-            onClick={handleSignUpClickEvent}
-          >
-            Sign Up
-          </button>
-        </div>
-      </div>
-      
-    </>
+      </motion.header>
+
+      <main className="flex-grow flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+        <motion.h2 
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="text-4xl sm:text-5xl font-extrabold text-center mb-8"
+        >
+          Collaborate in Real-Time
+        </motion.h2>
+        <motion.p 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+          className="text-xl sm:text-2xl text-center mb-12 max-w-3xl"
+        >
+          A place to meet, draw, write, code, and collaborate - all in one stop.
+        </motion.p>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+          className="grid grid-cols-2 sm:grid-cols-3 gap-8 mb-12"
+        >
+          <Feature icon={<Pencil size={24} />} title="Draw Together" />
+          <Feature icon={<FileText size={24} />} title="Create Docs" />
+          <Feature icon={<Code size={24} />} title="Solve Coding Problems" />
+          {/* <Feature icon={<Users size={24} />} title="Team Collaboration" />
+          <Feature icon={<Video size={24} />} title="Live Video Chat" /> */}
+        </motion.div>
+      </main>
+
+      <motion.footer 
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.5 }}
+        className="p-6 text-center text-gray-400"
+      >
+        © 2024 UniSync. All rights reserved.
+      </motion.footer>
+    </div>
   );
-}
+};
+
+const Feature = ({ icon, title }) => (
+  <motion.div 
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    className="flex flex-col items-center text-center"
+  >
+    <motion.div 
+      whileHover={{ rotate: 360 }}
+      transition={{ duration: 0.5 }}
+      className="bg-gradient-to-r from-yellow-400 to-red-500 p-3 rounded-full mb-4"
+    >
+      {icon}
+    </motion.div>
+    <h3 className="text-lg font-semibold">{title}</h3>
+  </motion.div>
+);
+
+const Button = ({ children, onClick, primary, small }) => (
+  <motion.button
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    onClick={onClick}
+    className={`
+      ${small ? 'px-4 py-2 text-sm' : 'px-6 py-3'} 
+      rounded-full font-semibold transition duration-300 ease-in-out 
+      ${primary
+        ? "bg-gradient-to-r from-yellow-400 to-red-500 text-white"
+        : "bg-white text-gray-900"
+      }
+    `}
+  >
+    {children}
+  </motion.button>
+);
 
 export default App;

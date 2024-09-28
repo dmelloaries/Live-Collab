@@ -569,11 +569,20 @@ const VideoCall: React.FC = () => {
       <div>
         <Toaster />
       </div>
-      <div className="flex absolute w-auto h-12 m-6 items-center justify-end rounded-full">
+      {/* <div className="flex absolute w-auto h-12 m-6 items-center justify-end rounded-full">
         <UserButton
           appearance={{
             elements: {
               avatarBox: "h-12 w-12 ",
+            },
+          }}
+        />
+      </div> */}
+      <div className="flex absolute bottom-0 left-0 w-auto h-12 m-6 items-center justify-end rounded-full">
+        <UserButton
+          appearance={{
+            elements: {
+              avatarBox: "h-12 w-12",
             },
           }}
         />
@@ -662,15 +671,12 @@ const VideoCall: React.FC = () => {
           />
 
           <BottomBar
-            handleToggleMute={handleToggleMute}
+            // handleToggleMute={handleToggleMute}
             disconnectRoom={disconnectRoom}
-            handleToggleVideo={handleToggleVideo}
-            clickedIcon={clickedIcon}
+            // handleToggleVideo={handleToggleVideo}
+            // clickedIcon={clickedIcon}
           />
-
-         
         </div>
-        
       </div>
       <Code clickedIcon={clickedIcon} user={user?.fullName} />
     </div>

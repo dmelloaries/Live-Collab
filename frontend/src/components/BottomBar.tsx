@@ -42,38 +42,14 @@ const BottomBar = ({
             : "transition-all duration-300 transform translate-y-6 opacity-100 hover:translate-y-0"
         }`}
       >
-        {/* <button
-          className="text-secondary  bg-gray-900 hover:text-gray-900 hover:bg-secondary hover:font-bold font-semibold rounded-full w-min py-4 px-10 grow-0 mb-10 "
-          onClick={() => {
-            handleToggleMute();
-            toggleMuteIcon();
-          }}
-        >
-          {muteIcon === AiFillAudio ? (
-            <AiOutlineAudioMuted className={"h-6 w-6"} />
-          ) : (
-            <AiFillAudio className={"h-6 w-6"} />
-          )}
-        </button> */}
+        
         <button
-          className="bg-red-600 hover:bg-red-600 hover:font-bold font-semibold rounded-full w-min py-3 px-36 grow-0 mb-10"
+          className=""
           onClick={disconnectRoom}
         >
           {<MdCallEnd />}
         </button>
-        {/* <button
-          className="text-secondary bg-gray-900 hover:text-gray-900 hover:bg-secondary hover:font-bold font-semibold rounded-full w-min py-3 px-10 grow-0 mb-10"
-          onClick={() => {
-            handleToggleVideo();
-            toggleVideoIcon();
-          }}
-        >
-          {videoIcon === FaVideo ? (
-            <FaVideoSlash className={"h-6 w-6"} />
-          ) : (
-            <FaVideo className={"h-6 w-6"} />
-          )}
-        </button> */}
+      
       </div>
     </>
   );
