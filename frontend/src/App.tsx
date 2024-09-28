@@ -1,6 +1,5 @@
-import React from 'react';
 import { useNavigate } from "react-router-dom";
-import { Pencil, FileText, Code, Users, Video } from 'lucide-react';
+import { Pencil, FileText, Code } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const App = () => {
@@ -53,8 +52,6 @@ const App = () => {
           <Feature icon={<Pencil size={24} />} title="Draw Together" />
           <Feature icon={<FileText size={24} />} title="Create Docs" />
           <Feature icon={<Code size={24} />} title="Solve Coding Problems" />
-          {/* <Feature icon={<Users size={24} />} title="Team Collaboration" />
-          <Feature icon={<Video size={24} />} title="Live Video Chat" /> */}
         </motion.div>
       </main>
 
@@ -70,7 +67,13 @@ const App = () => {
   );
 };
 
-const Feature = ({ icon, title }) => (
+// Define prop types for Feature component
+interface FeatureProps {
+  icon: JSX.Element;
+  title: string;
+}
+
+const Feature: React.FC<FeatureProps> = ({ icon, title }) => (
   <motion.div 
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
@@ -87,19 +90,26 @@ const Feature = ({ icon, title }) => (
   </motion.div>
 );
 
-const Button = ({ children, onClick, primary, small }) => (
+// Define prop types for Button component
+interface ButtonProps {
+  children: React.ReactNode;
+  onClick: () => void;
+  primary?: boolean;
+  small?: boolean;
+}
+
+const Button: React.FC<ButtonProps> = ({ children, onClick, primary = false, small = false }) => (
   <motion.button
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
     onClick={onClick}
-    className={`
-      ${small ? 'px-4 py-2 text-sm' : 'px-6 py-3'} 
-      rounded-full font-semibold transition duration-300 ease-in-out 
-      ${primary
+    className={`${
+      small ? 'px-4 py-2 text-sm' : 'px-6 py-3'
+    } rounded-full font-semibold transition duration-300 ease-in-out ${
+      primary
         ? "bg-gradient-to-r from-yellow-400 to-red-500 text-white"
         : "bg-white text-gray-900"
-      }
-    `}
+    }`}
   >
     {children}
   </motion.button>

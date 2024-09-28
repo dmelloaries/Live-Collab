@@ -537,32 +537,32 @@ const VideoCall: React.FC = () => {
     setMovedRight(!movedRight);
   };
 
-  const handleToggleMute = async () => {
-    const audioTracks = localStream?.getAudioTracks();
+  // const handleToggleMute = async () => {
+  //   const audioTracks = localStream?.getAudioTracks();
 
-    audioTracks?.forEach((track) => {
-      if (track.enabled) {
-        track.enabled = false; // Mute the track
-        console.log("muted");
-      } else {
-        track.enabled = true; // Unmute the track
-        console.log("unmuted");
-      }
-    });
-  };
-  const handleToggleVideo = async () => {
-    const videoTracks = localStream?.getVideoTracks();
+  //   audioTracks?.forEach((track) => {
+  //     if (track.enabled) {
+  //       track.enabled = false; // Mute the track
+  //       console.log("muted");
+  //     } else {
+  //       track.enabled = true; // Unmute the track
+  //       console.log("unmuted");
+  //     }
+  //   });
+  // };
+  // const handleToggleVideo = async () => {
+  //   const videoTracks = localStream?.getVideoTracks();
 
-    videoTracks?.forEach((track) => {
-      if (track.enabled) {
-        track.enabled = false; // turn off the video
-        console.log("turned off");
-      } else {
-        track.enabled = true; // turn on the video
-        console.log("unmuted");
-      }
-    });
-  };
+  //   videoTracks?.forEach((track) => {
+  //     if (track.enabled) {
+  //       track.enabled = false; // turn off the video
+  //       console.log("turned off");
+  //     } else {
+  //       track.enabled = true; // turn on the video
+  //       console.log("unmuted");
+  //     }
+  //   });
+  // };
 
   return (
     <div className="h-screen">

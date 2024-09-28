@@ -1,27 +1,3 @@
-// import React, { useState, useEffect } from "react";
-// import Editor from "@monaco-editor/react";
-// import { Socket, io } from "socket.io-client";
-// import axios from "axios";
-// import {
-//   Box,
-//   Button,
-//   Text,
-//   useToast,
-//   Flex,
-//   Select,
-//   IconButton,
-//   VStack,
-//   Heading,
-//   HStack,
-// } from "@chakra-ui/react";
-// import {
-//   Play,
-//   Code as CodeIcon,
-//   Terminal,
-//   ChevronLeft,
-//   ChevronRight,
-// } from "lucide-react";
-// import problems from "../utils/problems"; // Importing your problem JSON
 import React, { useState, useEffect } from "react";
 import Editor from "@monaco-editor/react";
 import { Socket, io } from "socket.io-client";
@@ -48,7 +24,9 @@ import {
   Book,
   Settings,
 } from "lucide-react";
-import problems from "../utils/problems";
+
+
+import problems from "../utils/problems"
 
 
 const SAVE_INTERVAL_MS = 2000;
@@ -185,11 +163,15 @@ function Code() {
       setIsError(!!result.run.stderr);
   
       socket?.emit("send-output", runOutput);
-    } catch (error) {
+    } catch (error: unknown) {
       console.error(error);
+    
+      // Narrow the type of error
+      const message = error instanceof Error ? error.message : "Unable to run code";
+    
       toast({
         title: "An error occurred.",
-        description: error.message || "Unable to run code",
+        description: message,
         status: "error",
         duration: 6000,
         isClosable: true,
@@ -197,6 +179,7 @@ function Code() {
     } finally {
       setIsLoading(false);
     }
+    
   };
 
   const goToPreviousProblem = () => {

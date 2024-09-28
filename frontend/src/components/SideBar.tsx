@@ -3,7 +3,7 @@ import { BsPencilFill } from "react-icons/bs";
 import { PiFileTextBold } from "react-icons/pi";
 import { RiCodeBoxFill } from "react-icons/ri";
 import { MdCallEnd } from "react-icons/md"; // Icon for the Call End button
-import { useNavigate } from "react-router-dom"; // React Router for navigation
+//import { useNavigate } from "react-router-dom"; // React Router for navigation
 
 interface Props {
   clickedIcon: (arg0: string) => void;
@@ -22,7 +22,6 @@ const SideBar = (props: Props) => {
     CodeBox: true,
   });
 
-  const navigate = useNavigate();
 
   function handleIconClick(arg0: string) {
     props.clickedIcon(arg0 === undefined ? initial : arg0);
