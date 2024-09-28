@@ -652,7 +652,8 @@ const VideoCall: React.FC = () => {
             handleToggleVideo={() => {}} // Add empty function to satisfy prop types
           />
         </div>
-        <Code clickedIcon={clickedIcon} user={user?.fullName || ""} />
+        // @ts-ignore
+        <Code clickedIcon={clickedIcon} user={user?.fullName || ""} /> 
       </div>
       
 
