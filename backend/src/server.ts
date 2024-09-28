@@ -224,9 +224,9 @@ io.on("connection", (socket) => {
   
 });
 
-app.get("/",(req,res)=>{
-  res.json("server is live");
-})
+app.get("/", (req,res) => {
+  res.send("Server is live");
+});
 
 app.get("/find/:id/:name", async (req, res) => {
   const { id, name } = req.params;
