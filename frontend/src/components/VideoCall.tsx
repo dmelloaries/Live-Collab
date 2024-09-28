@@ -83,9 +83,8 @@ const VideoCall: React.FC = () => {
     setRtcPeerConnection(peerConnection);
     return peerConnection;
   };
-
   const createRoom = () => {
-    let room = roomInputRef.current?.value;
+    let room = roomInputRef.current?.value || "";
     setInHome(false);
     setClickedIcon("Video");
 
@@ -101,15 +100,16 @@ const VideoCall: React.FC = () => {
           toast.error("Unable to copy Room ID:", err);
         });
 
-      socket?.emit("join", { room, name: user?.fullName });
+      socket?.emit("join", { room, name: user?.fullName || "" });
       setRoomId(room);
       return;
     } else {
-      socket?.emit("join", { room, name: user?.fullName });
+      socket?.emit("join", { room, name: user?.fullName || "" });
 
       showVideoConference();
     }
   };
+
   const joinRoom = (id: string) => {
     const room = id;
     console.log(room);
@@ -642,10 +642,10 @@ const VideoCall: React.FC = () => {
           />
 
           <BottomBar
-            // handleToggleMute={handleToggleMute}
             disconnectRoom={disconnectRoom}
-            // handleToggleVideo={handleToggleVideo}
             clickedIcon={clickedIcon}
+            handleToggleMute={() => {}} // Add empty function to satisfy prop types
+            handleToggleVideo={() => {}} // Add empty function to satisfy prop types
           />
         </div>
       </div>
