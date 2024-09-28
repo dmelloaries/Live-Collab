@@ -77,7 +77,14 @@ const files: Files = {
   
 };
 
-function Code() {
+interface CodeProps {
+  clickedIcon: string;
+  user: string;
+}
+
+
+
+const Code: React.FC<CodeProps> = ({ clickedIcon, user }) => {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [fileName, setFileName] = useState<string>("Javascript");
   const file = files[fileName];
