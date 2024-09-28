@@ -220,6 +220,8 @@ io.on("connection", (socket) => {
       socket.broadcast.to(event.roomId).emit("webrtc_ice_candidate", event);
     }
   );
+
+  
 });
 
 app.get("/find/:id/:name", async (req, res) => {
