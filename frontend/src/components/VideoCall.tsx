@@ -257,11 +257,10 @@ const VideoCall: React.FC = () => {
       console.log(callerId);
     }
   };
-
   useEffect(() => {
     if (user?.fullName && roomId) {
       const fetchDocument = async () => {
-        const name = user?.fullName;
+        const name = user?.fullName || ""; // Provide a default empty string
         try {
           const response = await fetch(
             `${import.meta.env.VITE_BACKEND_URL}/create_doc/${roomId}/${name}`
@@ -278,7 +277,7 @@ const VideoCall: React.FC = () => {
 
       fetchDocument();
     }
-  });
+  }, [user?.fullName, roomId]);
 
   useEffect(() => {
     const borderThreshold = 37;
@@ -397,7 +396,6 @@ const VideoCall: React.FC = () => {
       socket.on("room_created", async () => {
         console.log("Socket event callback: room_created");
         console.log(callerId);
-
         callerIdRef.current = socket.id;
         console.log(callerIdRef.current);
         callerId = callerIdRef.current;
@@ -537,33 +535,6 @@ const VideoCall: React.FC = () => {
     setMovedRight(!movedRight);
   };
 
-  // const handleToggleMute = async () => {
-  //   const audioTracks = localStream?.getAudioTracks();
-
-  //   audioTracks?.forEach((track) => {
-  //     if (track.enabled) {
-  //       track.enabled = false; // Mute the track
-  //       console.log("muted");
-  //     } else {
-  //       track.enabled = true; // Unmute the track
-  //       console.log("unmuted");
-  //     }
-  //   });
-  // };
-  // const handleToggleVideo = async () => {
-  //   const videoTracks = localStream?.getVideoTracks();
-
-  //   videoTracks?.forEach((track) => {
-  //     if (track.enabled) {
-  //       track.enabled = false; // turn off the video
-  //       console.log("turned off");
-  //     } else {
-  //       track.enabled = true; // turn on the video
-  //       console.log("unmuted");
-  //     }
-  //   });
-  // };
-
   return (
     <div className="h-screen">
       <div>
@@ -674,11 +645,11 @@ const VideoCall: React.FC = () => {
             // handleToggleMute={handleToggleMute}
             disconnectRoom={disconnectRoom}
             // handleToggleVideo={handleToggleVideo}
-            // clickedIcon={clickedIcon}
+            clickedIcon={clickedIcon}
           />
         </div>
       </div>
-      <Code clickedIcon={clickedIcon} user={user?.fullName} />
+      <Code clickedIcon={clickedIcon} user={user?.fullName || ""} />
     </div>
   );
 };

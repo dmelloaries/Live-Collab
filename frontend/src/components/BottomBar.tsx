@@ -43,13 +43,13 @@ const BottomBar = ({
       }`}
     >
       <button onClick={toggleMuteIcon}>
-        {muteIcon()} {/* Call the state function to render the current icon */}
+        <muteIcon /> {/* Render the current icon as a component */}
       </button>
       <button onClick={toggleVideoIcon}>
-        {videoIcon()} {/* Call the state function to render the current icon */}
+        <videoIcon /> {/* Render the current icon as a component */}
       </button>
       <button onClick={disconnectRoom}>
-        {<MdCallEnd />}
+        <MdCallEnd />
       </button>
     </div>
   );
