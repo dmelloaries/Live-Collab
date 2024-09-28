@@ -37,7 +37,7 @@ const maximum = 10;
 
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: "https://unisync-1.onrender.com",
     methods: ["GET", "POST"],
   },
 });
