@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { IconType } from "react-icons";
-import { AiFillAudio, AiOutlineAudioMuted } from "react-icons/ai";
-import { FaVideo, FaVideoSlash } from "react-icons/fa6";
+// import { useState } from "react";
+// import { IconType } from "react-icons";
+// import { AiFillAudio, AiOutlineAudioMuted } from "react-icons/ai";
+// import { FaVideo, FaVideoSlash } from "react-icons/fa6";
 import { MdCallEnd } from "react-icons/md";
 
 interface Props {
@@ -12,27 +12,27 @@ interface Props {
 }
 
 const BottomBar = ({
-  handleToggleMute,
+ 
   disconnectRoom,
-  handleToggleVideo,
+  
   clickedIcon,
 }: Props) => {
-  const [muteIcon, setMuteIcon] = useState<IconType>(AiOutlineAudioMuted);
+  // const [muteIcon, setMuteIcon] = useState<IconType>(AiOutlineAudioMuted);
 
-  const [videoIcon, setVideoIcon] = useState<IconType>(FaVideoSlash);
-  const toggleMuteIcon = () => {
-    console.log(muteIcon);
-    setMuteIcon((prevIcon: IconType) =>
-      prevIcon === AiFillAudio ? AiOutlineAudioMuted : AiFillAudio
-    );
-  };
+  // const [videoIcon, setVideoIcon] = useState<IconType>(FaVideoSlash);
+  // const toggleMuteIcon = () => {
+  //   console.log(muteIcon);
+  //   setMuteIcon((prevIcon: IconType) =>
+  //     prevIcon === AiFillAudio ? AiOutlineAudioMuted : AiFillAudio
+  //   );
+  // };
 
-  const toggleVideoIcon = () => {
-    console.log(videoIcon);
-    setVideoIcon((prevIcon: IconType) =>
-      prevIcon === FaVideo ? FaVideoSlash : FaVideo
-    );
-  };
+  // const toggleVideoIcon = () => {
+  //   console.log(videoIcon);
+  //   setVideoIcon((prevIcon: IconType) =>
+  //     prevIcon === FaVideo ? FaVideoSlash : FaVideo
+  //   );
+  // };
   return (
     <>
       <div
