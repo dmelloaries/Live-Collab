@@ -224,6 +224,10 @@ io.on("connection", (socket) => {
   
 });
 
+app.get("/",(req,res)=>{
+  res.json("server is live");
+})
+
 app.get("/find/:id/:name", async (req, res) => {
   const { id, name } = req.params;
 
@@ -305,7 +309,7 @@ app.get("/create_doc/:id/:name", async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3120;
 
 server.listen(port, () => {
   console.log(`Express server listening on port ${port}`);
