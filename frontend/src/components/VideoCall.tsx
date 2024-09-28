@@ -21,8 +21,12 @@ const VideoCall: React.FC = () => {
   const localVideoRef = useRef<HTMLVideoElement | null>(null);
   const remoteVideoRef = useRef<HTMLVideoElement | null>(null);
   const { user } = useUser();
-  const callerIdRef = useRef<string>("");
-  let callerId: string;
+ 
+  const callerIdRef = useRef<string | null | undefined>(null);
+  let callerId: string = "";
+  //let callerId: string | null = null;
+
+  //let callerId: string;
 
   const [localStream, setLocalStream] = useState<MediaStream>();
   const [remoteStream, setRemoteStream] = useState<MediaStream>();
@@ -398,7 +402,7 @@ const VideoCall: React.FC = () => {
         console.log(callerId);
         callerIdRef.current = socket.id;
         console.log(callerIdRef.current);
-        callerId = callerIdRef.current;
+        callerId = callerIdRef.current ?? "";
         console.log(callerId);
       });
 
@@ -650,6 +654,7 @@ const VideoCall: React.FC = () => {
         </div>
       </div>
       <Code clickedIcon={clickedIcon} user={user?.fullName || ""} />
+
     </div>
   );
 };
