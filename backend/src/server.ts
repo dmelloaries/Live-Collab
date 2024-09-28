@@ -37,14 +37,26 @@ const maximum = 10;
 
 const io = new Server(server, {
   cors: {
-    origin: "https://unisync-1.onrender.com",
+    origin: "*",
     methods: ["GET", "POST"],
   },
 });
 console.log("testing");
 
 app.use(cors());
-
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      
+      "https://unisync-1.onrender.com",
+    ],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+    //allowedHeaders: ["Access-Control-Allow-Origin"],
+  })
+);
 app.use("/", express.static("public"));
 
 const defaultValue = "create here ";
