@@ -1,3 +1,160 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
+ */
+
+
+ @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .sidebar-icons {
+    @apply relative flex items-center justify-center h-12 w-12 mt-3 mb-3 hover:mt-6 hover:mb-6 mx-auto text-secondary bg-gray-900
+            hover:text-gray-900 hover:bg-secondary rounded-3xl hover:rounded-2xl transition-all duration-300 ease-linear cursor-pointer;
+  }
+}
+
+.excalidraw__canvas-wrapper,
+.excalidraw__canvas.static {
+  pointer-events: none;
+  border-radius: 20px;
+}
+
+/* Style for the editor container */
+.editor-container {
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh; */
+}
+
+/* Style for the pseudo-rounded background */
+.rounded-background {
+  background-color: #1e1e1e;
+  border-radius: 34px;
+  margin-top: 3rem;
+  margin-left: 5rem;
+  height: 90vh;
+}
+
+.lang {
+  width: 93vw;
+  /* background-color: #1e1e1e; */
+}
+
+.langbtn {
+  background-color: #1e1e1e;
+}
+
+/* Style for the textarea (or any editor element) */
+
+/* div .ql-toolbar.ql-snow {
+  @apply flex justify-center sticky top-0 z-10 bg-gray-100 border-none shadow-md;
+}
+div .ql-container.ql-snow {
+  @apply flex rounded-xl justify-center;
+}*/
+
+/* div .cl-rootBox cl-signIn-root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  background-color: red;
+} */
+
+/* Dropdown button styles */
+
+div .quill.block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+div .ql-toolbar.ql-snow {
+  width: 8.5in;
+  display: flex;
+  justify-content: center;
+  position: sticky;
+  top: 1;
+  margin-top: 20px;
+  z-index: 1;
+  background-color: #f1e0dd;
+  border: none;
+  box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 20px 20px;
+}
+div .ql-container.ql-snow {
+  border: none;
+  display: flex;
+  justify-content: center;
+}
+
+div .ql-editor {
+  width: 8.5in;
+  height: 88vh;
+  /* min-height: 11in; */
+  padding: 1in;
+  margin: 1rem;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+  background-color: white;
+  color: black;
+  border-radius: 15px 15px;
+}
+
+@page {
+  margin: 1in;
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  overflow: hidden;
+}
+body {
+  overflow: hidden;
+  background-color: #1c1919;
+}
+
+.ProseMirror {
+  background-color: white;
+  color: black;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  overflow: hidden;
+}
+
+.bg-gray-700 {
+  scrollbar-width: thin; /* Make the scrollbar thinner */
+  scrollbar-color: rgba(155, 155, 155, 0.5) rgba(255, 255, 255, 0.1); /* Change scrollbar colors */
+}
+
+.bg-gray-700::-webkit-scrollbar {
+  width: 8px; /* Set the width of the scrollbar */
+}
+
+.bg-gray-700::-webkit-scrollbar-thumb {
+  background-color: rgba(155, 155, 155, 0.5); /* Thumb color */
+  border-radius: 4px; /* Rounded corners for the thumb */
+}
+
+.bg-gray-700::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(155, 155, 155, 0.8); /* Thumb color on hover */
+}
+
+.bg-gray-700::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.1); /* Track color */
+  border-radius: 8px; /* Rounded corners for the track */
+}
