@@ -28,7 +28,10 @@ function ClerkProviderWithRoutes() {
       appearance={{
         baseTheme: dark,
       }}
-      navigate={(to) => navigate(to)}
+      navigate={(to) => {
+        console.log(to);
+        navigate(to);
+      }}
     >
       <Routes>
         <Route path="/" element={<App />} />
