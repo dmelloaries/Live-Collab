@@ -29,7 +29,7 @@ function ClerkProviderWithRoutes() {
         baseTheme: dark,
       }}
       navigate={(to) => {
-        console.log(to);
+        console.log(to, "To console dssdsdsfsfs");
         navigate(to);
       }}
     >
@@ -77,7 +77,6 @@ function ClerkProviderWithRoutes() {
             </>
           }
         />
-        <Route path="/homepage" element={<HomePage />} />
       </Routes>
     </ClerkProvider>
   );
