@@ -4,6 +4,7 @@ import { PiFileTextBold } from "react-icons/pi";
 import { RiCodeBoxFill } from "react-icons/ri";
 import { MdCallEnd } from "react-icons/md"; // Icon for the Call End button
 //import { useNavigate } from "react-router-dom"; // React Router for navigation
+import { FaVideo } from "react-icons/fa6";
 
 interface Props {
   clickedIcon: (arg0: string) => void;

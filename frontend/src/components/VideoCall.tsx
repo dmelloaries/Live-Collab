@@ -90,7 +90,7 @@ const VideoCall: React.FC = () => {
   const createRoom = () => {
     let room = roomInputRef.current?.value || "";
     setInHome(false);
-    setClickedIcon("Video");
+    setClickedIcon("CodeBox");
 
     if (!room) {
       room = uuidv4();
@@ -652,8 +652,8 @@ const VideoCall: React.FC = () => {
             handleToggleVideo={() => {}} // Add empty function to satisfy prop types
           />
         </div>
-        // @ts-ignore
-        <Code clickedIcon={clickedIcon} user={user?.fullName || ""} /> 
+       
+        <Code/> 
       </div>
       
 

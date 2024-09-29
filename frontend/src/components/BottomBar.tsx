@@ -1,7 +1,4 @@
-// import { useState } from "react";
-// import { IconType } from "react-icons";
-// import { AiFillAudio, AiOutlineAudioMuted } from "react-icons/ai";
-// import { FaVideo, FaVideoSlash } from "react-icons/fa6";
+
 import { MdCallEnd } from "react-icons/md";
 
 interface Props {

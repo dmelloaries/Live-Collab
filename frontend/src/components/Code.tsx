@@ -25,9 +25,7 @@
 //   Settings,
 // } from "lucide-react";
 
-
 // import problems from "../utils/problems"
-
 
 // const SAVE_INTERVAL_MS = 2000;
 // const API = axios.create({
@@ -74,7 +72,7 @@
 //     language: "rust",
 //     value: `fn main() {\n    println!("Hello, World from rust!");\n}`,
 //   },
-  
+
 // };
 
 // function Code() {
@@ -142,32 +140,32 @@
 //     if (!sourceCode) return;
 //     try {
 //       setIsLoading(true);
-  
+
 //       // Adjust the filename for C++
 //       const filename = file.language === "cpp" ? "main.cpp" : "main";
-  
+
 //       const response = await API.post("/execute", {
 //         language: file.language, // Pass correct language identifier
 //         version: "*",
 //         files: [{ name: filename, content: sourceCode }], // Use proper file name for C++
 //       });
-  
+
 //       const result = response.data;
-  
+
 //       // Capture output or error
 //       const runOutput = result.run.output || result.run.stderr;
 //       setOutput(runOutput);
-  
+
 //       // Set error state based on the presence of stderr
 //       setIsError(!!result.run.stderr);
-  
+
 //       socket?.emit("send-output", runOutput);
 //     } catch (error: unknown) {
 //       console.error(error);
-    
+
 //       // Narrow the type of error
 //       const message = error instanceof Error ? error.message : "Unable to run code";
-    
+
 //       toast({
 //         title: "An error occurred.",
 //         description: message,
@@ -178,7 +176,7 @@
 //     } finally {
 //       setIsLoading(false);
 //     }
-    
+
 //   };
 
 //   const goToPreviousProblem = () => {
@@ -364,7 +362,6 @@
 
 // export default Code;
 
-
 import React, { useState, useEffect } from "react";
 import Editor from "@monaco-editor/react";
 import { Socket, io } from "socket.io-client";
@@ -392,9 +389,7 @@ import {
   Settings,
 } from "lucide-react";
 
-
-import problems from "../utils/problems"
-
+import problems from "../utils/problems";
 
 const SAVE_INTERVAL_MS = 2000;
 const API = axios.create({
@@ -441,17 +436,9 @@ const files: Files = {
     language: "rust",
     value: `fn main() {\n    println!("Hello, World from rust!");\n}`,
   },
-  
 };
 
-interface CodeProps {
-  clickedIcon: string;
-  user: string;
-}
-
-
- // @ts-ignore
-const Code: React.FC<CodeProps> = ({ clickedIcon, user }) => {  // @ts-ignore
+const Code: React.FC<object> = () => {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [fileName, setFileName] = useState<string>("Javascript");
   const file = files[fileName];
@@ -516,32 +503,33 @@ const Code: React.FC<CodeProps> = ({ clickedIcon, user }) => {  // @ts-ignore
     if (!sourceCode) return;
     try {
       setIsLoading(true);
-  
+
       // Adjust the filename for C++
       const filename = file.language === "cpp" ? "main.cpp" : "main";
-  
+
       const response = await API.post("/execute", {
         language: file.language, // Pass correct language identifier
         version: "*",
         files: [{ name: filename, content: sourceCode }], // Use proper file name for C++
       });
-  
+
       const result = response.data;
-  
+
       // Capture output or error
       const runOutput = result.run.output || result.run.stderr;
       setOutput(runOutput);
-  
+
       // Set error state based on the presence of stderr
       setIsError(!!result.run.stderr);
-  
+
       socket?.emit("send-output", runOutput);
     } catch (error: unknown) {
       console.error(error);
-    
+
       // Narrow the type of error
-      const message = error instanceof Error ? error.message : "Unable to run code";
-    
+      const message =
+        error instanceof Error ? error.message : "Unable to run code";
+
       toast({
         title: "An error occurred.",
         description: message,
@@ -552,7 +540,6 @@ const Code: React.FC<CodeProps> = ({ clickedIcon, user }) => {  // @ts-ignore
     } finally {
       setIsLoading(false);
     }
-    
   };
 
   const goToPreviousProblem = () => {
@@ -571,168 +558,171 @@ const Code: React.FC<CodeProps> = ({ clickedIcon, user }) => {  // @ts-ignore
     }
   };
 
-return (
-  <Flex direction="column" h="100vh" bg="gray.900" color="white">
-    {/* Top bar */}
-    <Flex
-      justifyContent="space-between"
-      alignItems="center"
-      p={4}
-      borderBottom="1px solid"
-      borderColor="gray.700"
-      bg="gray.800"
-    >
-      <Flex alignItems="center">
-        <CodeIcon size={24} className="mr-4" />
-        <Select
-          value={fileName}
-          onChange={handleLanguageChange}
-          width="200px"
-          variant="filled"
-          bg="gray.700"
-          color="white"
-          borderColor="gray.600"
-          _hover={{ borderColor: "gray.500" }}
-          size="md"
-          icon={<ChevronDown size={20} />}
-        >
-          {Object.keys(files).map((lang) => (
-            <option key={lang} value={lang}>
-              {lang}
-            </option>
-          ))}
-        </Select>
-      </Flex>
-      <HStack spacing={4}>
-        <Button
-          leftIcon={<Play size={20} />}
-          colorScheme="green"
-          onClick={runCode}
-          isLoading={isLoading}
-          loadingText="Running"
-          size="md"
-          variant="solid"
-          _hover={{ transform: "translateY(-2px)", boxShadow: "lg" }}
-        >
-          Run Code
-        </Button>
-        <IconButton
-          icon={<Settings size={20} />}
-          aria-label="Settings"
-          variant="ghost"
-          colorScheme="gray"
-          size="md"
-        />
-      </HStack>
-    </Flex>
-
-    <Flex flex={1} overflow="hidden">
-      {/* Left panel: Problem description */}
-      <Box
-        width="25%"
-        p={6}
-        borderRight="1px solid"
+  return (
+    <Flex direction="column" h="100vh" bg="gray.900" color="white">
+      {/* Top bar */}
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
+        p={4}
+        borderBottom="1px solid"
         borderColor="gray.700"
-        overflowY="auto"
         bg="gray.800"
       >
-        <VStack align="stretch" spacing={6}>
-          <Flex alignItems="center">
-            <Book size={24} className="mr-2" />
-            <Heading size="lg">Problem</Heading>
-          </Flex>
-          <Heading size="xl" color="blue.300">{selectedProblem.title}</Heading>
-          <Text fontSize="md">{selectedProblem.description}</Text>
-          <Box bg="gray.700" p={4} borderRadius="md" boxShadow="md">
-            <Text fontWeight="bold" mb={2} color="green.300">
-              Input:
-            </Text>
-            <Text>{JSON.stringify(selectedProblem.input)}</Text>
-          </Box>
-          <Box bg="gray.700" p={4} borderRadius="md" boxShadow="md">
-            <Text fontWeight="bold" mb={2} color="green.300">
-              Expected Output:
-            </Text>
-            <Text>{JSON.stringify(selectedProblem.expected_output)}</Text>
-          </Box>
-          <HStack justifyContent="space-between">
-            <IconButton
-              icon={<ChevronLeft size={24} />}
-              aria-label="Previous problem"
-              onClick={goToPreviousProblem}
-              isDisabled={currentProblemIndex === 0}
-              size="lg"
-              variant="outline"
-              colorScheme="blue"
-            />
-            <IconButton
-              icon={<ChevronRight size={24} />}
-              aria-label="Next problem"
-              onClick={goToNextProblem}
-              isDisabled={currentProblemIndex === problems.length - 1}
-              size="lg"
-              variant="outline"
-              colorScheme="blue"
-            />
-          </HStack>
-        </VStack>
-      </Box>
-
-      {/* Middle panel: Code editor */}
-      <Box flex={1} borderRight="1px solid" borderColor="gray.700">
-        <Editor
-          height="100%"
-          defaultLanguage="typescript"
-          language={file.language}
-          theme="vs-dark"
-          value={editorContent}
-          onChange={handleEditorChange}
-          options={{
-            minimap: { enabled: false },
-            fontSize: 16,
-            lineNumbers: "on",
-            roundedSelection: false,
-            scrollBeyondLastLine: false,
-            automaticLayout: true,
-            padding: { top: 16, bottom: 16 },
-          }}
-        />
-      </Box>
-
-      {/* Right panel: Output */}
-      <Box width="25%" p={6} bg="gray.800">
-        <VStack align="stretch" height="100%" spacing={4}>
-          <Flex alignItems="center">
-            <Terminal size={24} className="mr-2" />
-            <Heading size="md">Output</Heading>
-          </Flex>
-          <Box
-            flex={1}
+        <Flex alignItems="center">
+          <CodeIcon size={24} className="mr-4" />
+          <Select
+            value={fileName}
+            onChange={handleLanguageChange}
+            width="200px"
+            variant="filled"
             bg="gray.700"
-            p={4}
-            borderRadius="md"
-            overflowY="auto"
-            boxShadow="md"
+            color="white"
+            borderColor="gray.600"
+            _hover={{ borderColor: "gray.500" }}
+            size="md"
+            icon={<ChevronDown size={20} />}
           >
-            {output ? (
-              <Text
-                whiteSpace="pre-wrap"
-                fontFamily="monospace"
-                fontSize="md"
-                color={isError ? "red.400" : "green.400"}
-              >
-                {output}
+            {Object.keys(files).map((lang) => (
+              <option key={lang} value={lang}>
+                {lang}
+              </option>
+            ))}
+          </Select>
+        </Flex>
+        <HStack spacing={4}>
+          <Button
+            leftIcon={<Play size={20} />}
+            colorScheme="green"
+            onClick={runCode}
+            isLoading={isLoading}
+            loadingText="Running"
+            size="md"
+            variant="solid"
+            _hover={{ transform: "translateY(-2px)", boxShadow: "lg" }}
+          >
+            Run Code
+          </Button>
+          <IconButton
+            icon={<Settings size={20} />}
+            aria-label="Settings"
+            variant="ghost"
+            colorScheme="gray"
+            size="md"
+          />
+        </HStack>
+      </Flex>
+
+      <Flex flex={1} overflow="hidden">
+        {/* Left panel: Problem description */}
+        <Box
+          width="25%"
+          p={6}
+          borderRight="1px solid"
+          borderColor="gray.700"
+          overflowY="auto"
+          bg="gray.800"
+        >
+          <VStack align="stretch" spacing={6}>
+            <Flex alignItems="center">
+              <Book size={24} className="mr-2" />
+              <Heading size="lg">Problem</Heading>
+            </Flex>
+            <Heading size="xl" color="blue.300">
+              {selectedProblem.title}
+            </Heading>
+            <Text fontSize="md">{selectedProblem.description}</Text>
+            <Box bg="gray.700" p={4} borderRadius="md" boxShadow="md">
+              <Text fontWeight="bold" mb={2} color="green.300">
+                Input:
               </Text>
-            ) : (
-              <Text color="gray.400">
-                Run your code to see the output here
+              <code>{JSON.stringify(selectedProblem.input)}</code>
+            </Box>
+
+            <Box bg="gray.700" p={4} borderRadius="md" boxShadow="md">
+              <Text fontWeight="bold" mb={2} color="green.300">
+                Expected Output:
               </Text>
-            )}
-          </Box>
-        </VStack>
-      </Box>
+              <Text>{JSON.stringify(selectedProblem.expected_output)}</Text>
+            </Box>
+            <HStack justifyContent="space-between">
+              <IconButton
+                icon={<ChevronLeft size={24} />}
+                aria-label="Previous problem"
+                onClick={goToPreviousProblem}
+                isDisabled={currentProblemIndex === 0}
+                size="lg"
+                variant="outline"
+                colorScheme="blue"
+              />
+              <IconButton
+                icon={<ChevronRight size={24} />}
+                aria-label="Next problem"
+                onClick={goToNextProblem}
+                isDisabled={currentProblemIndex === problems.length - 1}
+                size="lg"
+                variant="outline"
+                colorScheme="blue"
+              />
+            </HStack>
+          </VStack>
+        </Box>
+
+        {/* Middle panel: Code editor */}
+        <Box flex={1} borderRight="1px solid" borderColor="gray.700">
+          <Editor
+            height="100%"
+            defaultLanguage="typescript"
+            language={file.language}
+            theme="vs-dark"
+            value={editorContent}
+            onChange={handleEditorChange}
+            options={{
+              minimap: { enabled: false },
+              fontSize: 16,
+              lineNumbers: "on",
+              roundedSelection: false,
+              scrollBeyondLastLine: false,
+              automaticLayout: true,
+              padding: { top: 16, bottom: 16 },
+            }}
+          />
+        </Box>
+
+        {/* Right panel: Output */}
+        <Box width="25%" p={6} bg="gray.800">
+          <VStack align="stretch" height="100%" spacing={4}>
+            <Flex alignItems="center">
+              <Terminal size={24} className="mr-2" />
+              <Heading size="md">Output</Heading>
+            </Flex>
+            <Box
+              flex={1}
+              bg="gray.700"
+              p={4}
+              borderRadius="md"
+              overflowY="auto"
+              boxShadow="md"
+            >
+              {output ? (
+                <Text
+                  whiteSpace="pre-wrap"
+                  fontFamily="monospace"
+                  fontSize="md"
+                  color={isError ? "red.400" : "green.400"}
+                >
+                  {output}
+                </Text>
+              ) : (
+                <Text color="gray.400">
+                  Run your code to see the output here
+                </Text>
+              )}
+            </Box>
+          </VStack>
+        </Box>
+      </Flex>
     </Flex>
-  </Flex>
-);
-}
+  );
+};
 export default Code;
